@@ -70,11 +70,8 @@ function getCellLazyImages( cellElem ) {
   }
 
   // select lazy images in cell
-  var imgs = cellElem.querySelectorAll('img[data-flickity-lazyload]');
-
-  if(imgs.length < 1) {
-    var imgs = cellElem.querySelectorAll('div[data-flickity-lazyload]');
-  }
+  var imgs = cellElem.querySelectorAll('img[data-flickity-lazyload]')
+    || cellElem.querySelectorAll('[data-flickity-lazyload]');
 
   return utils.makeArray( imgs );
 }
@@ -99,10 +96,10 @@ LazyLoader.prototype.load = function() {
   // load image
   var imgSrc = this.img.getAttribute('data-flickity-lazyload');
 
-  if(this.img.nodeName == 'DIV') {
-    this.img.style.backgroundImage = 'url("' + imgsrc + '")';
-  } else {
+  if(this.img.nodeName == 'IMG') {
     this.img.src = imgSrc;
+  } else {
+    this.img.style.backgroundImage = 'url("' + imgsrc + '")';
   }
 
   // remove attr
